@@ -1,0 +1,51 @@
+html,body{
+    font-family: 'Fira Mono';
+    padding:0;
+    margin:0;
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    max-width: 640px;
+    text-align: center;
+    flex-grow:1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+    font-weight:bold;
+    font-size: 25px;
+}
+
+a {
+    color: #333;
+    text-decoration: none; 
+}
+
+main a{
+    border: 1px solid #888;
+    padding: 8px;
+}
+
+main a:hover{
+    background: #e4e4e4;
+}
+
+footer{
+    text-align:center;
+    padding: 10px 0;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
