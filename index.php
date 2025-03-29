@@ -45,7 +45,6 @@ function rand_line($fileName, $maxLineLength = 4096) {
   <meta name="description" content="Insults for programmers">
   <meta name="author" content="Simon Dann">
 
-  <link rel="stylesheet" href="vendor/HTML5-Reset/assets/css/reset.css">
   <link href="//fonts.googleapis.com/css?family=Fira+Mono:400,700" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="styles.css?v=1.0">
 </head>
