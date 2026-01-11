@@ -1,6 +1,28 @@
-FROM ghcr.io/eriksoderblom/alpine-apache-php:25.12
+# Build stage
+FROM golang:1.25-alpine AS builder
 
-WORKDIR /htdocs
-COPY index.php insults.txt styles.css ./
+RUN apk add --no-cache upx
 
-EXPOSE 80
+WORKDIR /app
+
+COPY go.mod ./
+RUN go mod download
+
+COPY . .
+
+# Build and compress the binary.
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o programmer-insults .
+RUN upx --best programmer-insults
+
+# Final stage
+FROM alpine:latest
+
+RUN apk --no-cache add ca-certificates
+
+WORKDIR /root/
+
+COPY --from=builder /app/programmer-insults .
+
+EXPOSE 8080
+
+CMD ["./programmer-insults"]

@@ -1,0 +1,39 @@
+package main
+
+import (
+	"net/http"
+	"net/http/httptest"
+	"strings"
+	"testing"
+)
+
+func TestHandler(t *testing.T) {
+	req, err := http.NewRequest("GET", "/", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	rr := httptest.NewRecorder()
+	handler := http.HandlerFunc(handler)
+
+	handler.ServeHTTP(rr, req)
+
+	if status := rr.Code; status != http.StatusOK {
+		t.Errorf("handler returned wrong status code: got %v want %v",
+			status, http.StatusOK)
+	}
+
+	// Check if the response contains one of the insults
+	body := rr.Body.String()
+	found := false
+	for _, insult := range insults {
+		if strings.Contains(body, insult) {
+			found = true
+			break
+		}
+	}
+
+	if !found {
+		t.Errorf("handler returned body without expected insult: %v", body)
+	}
+}

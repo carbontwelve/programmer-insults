@@ -5,7 +5,7 @@ To build and run locally:
 
 ```bash
 docker build -t ghcr.io/carbontwelve/programmer-insults:latest .
-docker run --rm -p 8080:80 ghcr.io/carbontwelve/programmer-insults:latest
+docker run --rm -p 8080:8080 ghcr.io/carbontwelve/programmer-insults:latest
 ```
 
-The application image makes use of [`eriksoderblom/alpine-apache-php`](https://github.com/eriksoderblom/alpine-apache-php) as its base.
+The application is built with symbols and debugging information stripped and then passed through [`upx`](https://upx.github.io/) in order to produce the smallest binary possible. The resulting image size for this *basic* application is ~21MB with the binary compressed to ~3MB. 
